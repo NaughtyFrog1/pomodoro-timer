@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -20,12 +20,23 @@
 
     <title>Pomodoro Timer</title>
   </head>
-  <body>
-    <main class="container container--md">
-      <h1>Pomodoro Timer</h1>
 
+  <body>
+    <header class="container container--md">
+      <h1>Pomodoro Timer</h1>
+    </header>
+
+    <main class="container container--md">
       <div class="pomodoro">
-        <p class="pomodoro__timer"></p>
+        <p class="pomodoro__timer">25:00</p>
+
+        <div class="pomodoro__steps">
+          <button class="pomodoro__step pomodoro__step--1">1</button>
+          <button class="pomodoro__step pomodoro__step--2">2</button>
+          <button class="pomodoro__step pomodoro__step--3">3</button>
+          <button class="pomodoro__step pomodoro__step--4">4</button>
+        </div>
+
         <div class="pomodoro__buttons">
           <button class="btn pomodoro__restart">
             <i class="fas fa-redo-alt"></i>
@@ -38,38 +49,35 @@
           </button>
         </div>
       </div>
-
-      <div class="modal modal--options" id="modal-options">
-        <div class="modal__dialog">
-          <header class="modal__header">
-            
-          </header>
-          <section class="modal__content">
-            <form class="form">
-              <input 
-                class="input--number" 
-                id="options-work" 
-                type="number"
-                value="25"
-              >
-              <input 
-                class="input--number" 
-                id="options-break" 
-                type="number"
-                value="5"
-              >
-              <input 
-                class="input--number" 
-                id="options-long-break"
-                type="number"
-                value="25"
-              >
-            </form>
-          </section>
-          <footer class="modal__footer">
-          </footer>
-        </div>
-      </div>
     </main>
+
+    <section class="modal modal--options" id="modal-options">
+      <div class="modal__dialog container container--md">
+        <header class="modal__header"></header>
+        <section class="modal__content">
+          <form class="form">
+            <input
+              class="input--number"
+              id="options-work"
+              type="number"
+              value="25"
+            />
+            <input
+              class="input--number"
+              id="options-break"
+              type="number"
+              value="5"
+            />
+            <input
+              class="input--number"
+              id="options-long-break"
+              type="number"
+              value="25"
+            />
+          </form>
+        </section>
+        <footer class="modal__footer"></footer>
+      </div>
+    </section>
   </body>
 </html>
