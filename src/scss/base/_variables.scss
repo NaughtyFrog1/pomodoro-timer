@@ -1,0 +1,42 @@
+//* BREAKPOINTS
+
+$mobile:                      480px;
+$tablet:                      768px;
+$laptop:                      992px;
+$desktop:                     1200px;
+
+
+//* FONTS
+
+$font-ss:                     'Roboto', sans-serif;
+$font-cursive:                'Baloo Tammudu 2', cursive;
+
+$font-size-base:              1.6rem;
+$h1-font-size:                $font-size-base * 2.5;
+$h2-font-size:                $font-size-base * 2;
+$h3-font-size:                $font-size-base * 1.75;
+$h4-font-size:                $font-size-base * 1.5;
+$h5-font-size:                $font-size-base * 1.25;
+$h6-font-size:                $font-size-base;
+
+
+//* SPACING
+
+$properties: m, p;
+
+$spacer: 1.6rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  auto: auto
+);
+$sides: (
+  t: top,
+  b: bottom,
+  l: left,
+  r: right
+);

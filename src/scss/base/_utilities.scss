@@ -1,0 +1,79 @@
+//* CONTAINER
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+
+  &.container--sm {
+    max-width: 600px;
+  }
+
+  &.container--md {
+    max-width: 800px;
+  }
+
+  &.container--lg {
+    max-width: 1200px;
+  }
+}
+
+
+//* FONT-WEIGHT
+
+@each $fw in 100, 200, 300, 400, 500, 600, 700, 800, 900 {
+  .fw--#{$fw} {
+    font-weight: $fw;
+  }
+}
+
+
+//* TEXT-ALIGN
+
+@each $ta in left, center, right {
+  .ta--#{$ta} {
+    text-align: $ta;
+  }
+}
+
+
+//* SPACING
+
+@each $property in $properties {
+  $propertyValue: margin;
+  @if $property == p {
+    $propertyValue: padding;
+  }
+
+  @each $size in map-keys($spacers) {
+    @each $side in map-keys($sides) {
+      .#{$property}#{$side}-#{$size} {
+        #{$propertyValue}-#{map-get($sides, $side)}: map-get($spacers, $size);
+      }
+    }
+
+    .#{$property}#{$size} {
+      #{$propertyValue}: map-get($spacers, $size);
+    }
+    
+    @if map-get($spacers, $size) != 0 {
+      .#{$property}x-#{$size} {
+        #{$propertyValue}: 0 map-get($spacers, $size);
+      }
+
+      .#{$property}y-#{$size} {
+        #{$propertyValue}: map-get($spacers, $size) 0;
+      }
+    }
+  }
+}
+
+
+//* SECTION
+
+.section {
+  margin: map-get($spacers, 5) 0;
+
+  &.container {
+    margin: map-get($spacers, 4) auto;
+  }
+}
