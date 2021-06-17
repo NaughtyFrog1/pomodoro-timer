@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = (env, { mode }) => {
-  const BUILD_PATH = (mode === 'production') ? 'docs' : 'build';
+  const BUILD_PATH = mode === 'production' ? 'docs' : 'build';
 
   return {
     entry: {
@@ -42,9 +42,7 @@ module.exports = (env, { mode }) => {
       new MiniCssExtractPlugin(),
 
       new CopyPlugin({
-        patterns: [
-          { from: 'src/assets', to: 'assets' },
-        ],
+        patterns: [{ from: 'src/assets', to: 'assets' }],
       }),
 
       new ESLintPlugin(),
