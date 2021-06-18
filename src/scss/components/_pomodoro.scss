@@ -1,8 +1,8 @@
 .pomodoro {
   border: 1px solid lighten(#000, 85);
   border-radius: 100%;
-  width: Min(80vw, 450px);
   height: Min(80vw, 450px);
+  width: Min(80vw, 450px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,17 +10,17 @@
 }
 
 .pomodoro__timer {
-  font-size: clamp(6rem, 20vw, 10rem);
   color: lighten(#000, 12);
+  font-size: clamp(6rem, 20vw, 10rem);
+  line-height: 1;
   text-shadow: 0px 1px 2px transparentize(lighten(#000, 12), 0.5),
     0px 2px 10px transparentize(lighten(#000, 12), 0.67);
-  line-height: 1;
 }
 
 .pomodoro__buttons,
 .pomodoro__steps {
-  display: flex;
   align-items: center;
+  display: flex;
   margin: 0 auto;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .pomodoro__buttons {
-  max-width: 200px;
+  max-width: Min(200px, 40vw);
   margin-top: 5vh;
   justify-content: space-around;
 }
@@ -38,15 +38,29 @@
 .pomodoro__step {
   height: 0.8rem;
   width: 0.8rem;
-  background-color: lighten(#000, 75);
+  background-color: lighten(#000, 85);
   border-radius: 100%;
   margin: 0 0.8rem;
 
   &.pomodoro__step--active {
     height: 1rem;
     width: 1rem;
-    background-color: lighten(#000, 24);
-    box-shadow: 0px 1px 2px transparentize(lighten(#000, 24), 0.5),
-    0px 2px 8px transparentize(lighten(#000, 24), 0.67);
+    background-color: lighten(#000, 40);
+    box-shadow: 0px 1px 2px transparentize(lighten(#000, 40), 0.5),
+    0px 2px 8px transparentize(lighten(#000, 40), 0.67);
+  }
+}
+
+.pomodoro__btn {
+  color: lighten(#000, 18);
+  font-size: 2rem;
+  text-shadow: 0px 1px 2px transparentize(lighten(#000, 18), 0.5),
+    0px 2px 10px transparentize(lighten(#000, 18), 0.67);
+  transition: 0.1s ease-in-out transform;
+
+  &:hover {
+    transform: translateY(-1px);
+    text-shadow: 0px 2px 2px transparentize(lighten(#000, 18), 0.5),
+    0px 4px 10px transparentize(lighten(#000, 18), 0.67);
   }
 }
