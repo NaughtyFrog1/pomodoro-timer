@@ -22,22 +22,18 @@
   </head>
 
   <body>
-    <header class="container container--md">
-      <h1 class="header__title">Pomodoro Timer</h1>
-    </header>
-
-    <main class="container container--md">
-      <div class="pomodoro">
-        <p class="pomodoro__timer my-5 ta--center fw--600">25:00</p>
+    <main class="pomodoro container container--md">
+      <div>
+        <p class="pomodoro__timer mt-5 mb-2 ta--center fw--600">25:00</p>
 
         <div class="pomodoro__steps">
-          <button class="pomodoro__step pomodoro__step--1"></button>
-          <button class="pomodoro__step pomodoro__step--2"></button>
-          <button class="pomodoro__step pomodoro__step--3"></button>
-          <button class="pomodoro__step pomodoro__step--4"></button>
+          <button class="btn pomodoro__step"></button>
+          <button class="btn pomodoro__step pomodoro__step--active"></button>
+          <button class="btn pomodoro__step"></button>
+          <button class="btn pomodoro__step"></button>
         </div>
 
-        <div class="pomodoro__buttons">
+        <div class="pomodoro__buttons mt-5">
           <button class="btn pomodoro__restart">
             <i class="fas fa-redo-alt"></i>
           </button>
@@ -51,7 +47,7 @@
       </div>
     </main>
 
-    <section class="modal modal--options" id="modal-options">
+    <section class="modal modal--options hidden" id="modal-options">
       <div class="modal__dialog container container--md">
         <header class="modal__header"></header>
         <section class="modal__content">

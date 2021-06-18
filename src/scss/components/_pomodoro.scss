@@ -1,5 +1,52 @@
+.pomodoro {
+  border: 1px solid lighten(#000, 85);
+  border-radius: 100%;
+  width: Min(80vw, 450px);
+  height: Min(80vw, 450px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10vh;
+}
+
 .pomodoro__timer {
-  font-size: clamp(6rem, 20vw, 12rem);
-  color: lighten(#000, 7);
-  text-shadow: 0px 2px 6px transparentize(lighten(#000, 14), 0.33);
+  font-size: clamp(6rem, 20vw, 10rem);
+  color: lighten(#000, 12);
+  text-shadow: 0px 1px 2px transparentize(lighten(#000, 12), 0.5),
+    0px 2px 10px transparentize(lighten(#000, 12), 0.67);
+  line-height: 1;
+}
+
+.pomodoro__buttons,
+.pomodoro__steps {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.pomodoro__steps {
+  max-width: 120px;
+  justify-content: space-between;
+}
+
+.pomodoro__buttons {
+  max-width: 200px;
+  margin-top: 5vh;
+  justify-content: space-around;
+}
+
+.pomodoro__step {
+  height: 0.8rem;
+  width: 0.8rem;
+  background-color: lighten(#000, 75);
+  border-radius: 100%;
+  margin: 0 0.8rem;
+
+  &.pomodoro__step--active {
+    height: 1rem;
+    width: 1rem;
+    background-color: lighten(#000, 24);
+    box-shadow: 0px 1px 2px transparentize(lighten(#000, 24), 0.5),
+    0px 2px 8px transparentize(lighten(#000, 24), 0.67);
+  }
 }
