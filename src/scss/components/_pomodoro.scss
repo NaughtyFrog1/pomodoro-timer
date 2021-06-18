@@ -1,0 +1,5 @@
+.pomodoro__timer {
+  font-size: clamp(6rem, 20vw, 12rem);
+  color: lighten(#000, 7);
+  text-shadow: 0px 2px 6px transparentize(lighten(#000, 14), 0.33);
+}
