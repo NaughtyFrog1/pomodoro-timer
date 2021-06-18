@@ -14,7 +14,7 @@ html {
 body {
   font-size: 1.6rem;
   font-family: $font;
-  background-color: var(--white-93);
+  background-color: darken(#fff, 7);
 }
 
 a {
@@ -27,10 +27,11 @@ h3,
 h4,
 h5,
 h6 {
-  margin: var(--space-lg) 0 var(--space-md);
+  margin: map-get($spacers, 4) 0 map-get($spacers, 3);
   font-family: $font-header;
   font-weight: 700;
   text-align: center;
+  color: lighten(#000, 10);
 }
 
 h1 {
@@ -62,7 +63,7 @@ img {
 }
 
 p {
-  font-size: var(--text-md);
+  font-size: $font-size-base;
 }
 
 ul {
