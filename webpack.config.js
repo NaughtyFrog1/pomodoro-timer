@@ -45,7 +45,9 @@ module.exports = (env, { mode }) => {
         patterns: [{ from: 'src/assets', to: 'assets' }],
       }),
 
-      new ESLintPlugin(),
+      new ESLintPlugin({
+        failOnError: false,
+      }),
     ],
   };
 };
