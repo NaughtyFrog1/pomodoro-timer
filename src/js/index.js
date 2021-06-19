@@ -34,7 +34,7 @@ let timerInterval;
  * [x] toggleTimer()
  * [x] restartTimer()
  * [x] skipTimer()
- * [ ] changeStep()
+ * [x] changeStep()
  * [ ] updateTime()
  */
 
@@ -122,6 +122,16 @@ const skipPomodoro = (clickOn = true) => {
   updateTimer(false, false);
 };
 
+const changeStep = (e) => {
+  steps[step].classList.remove('pomodoro__step--active');
+  steps[e.target.dataset.step].classList.add('pomodoro__step--active');
+
+  step = parseInt(e.target.dataset.step, 10);
+  minutes = workTime;
+  seconds = 0;
+  isWorkTime = true;
+};
+
 printTimer();
 updateStep();
 
@@ -129,6 +139,8 @@ updateStep();
 start.addEventListener('click', togglePomodoro);
 restart.addEventListener('click', restartPomodoro);
 skip.addEventListener('click', skipPomodoro);
+
+steps.forEach((element) => element.addEventListener('click', changeStep));
 
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') togglePomodoro(false);
