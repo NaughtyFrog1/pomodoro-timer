@@ -124,12 +124,14 @@ const skipPomodoro = (clickOn = true) => {
 };
 
 const changeStep = (e) => {
+  const stepElement = e instanceof MouseEvent ? e.target : e;
+
   steps[step].classList.remove('pomodoro__step--active');
-  steps[e.target.dataset.step].classList.add('pomodoro__step--active');
+  steps[stepElement.dataset.step].classList.add('pomodoro__step--active');
 
   if (isRunning) togglePomodoro(false);
 
-  step = parseInt(e.target.dataset.step, 10);
+  step = parseInt(stepElement.dataset.step, 10);
   minutes = workTime;
   seconds = 0;
   isWorkTime = true;
@@ -150,4 +152,11 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') togglePomodoro(false);
   else if (e.code === 'KeyR') restartPomodoro(false);
   else if (e.code === 'KeyS') skipPomodoro(false);
+  else if (e.code.includes('Digit') || e.code.includes('Numpad')) {
+    const number = parseInt(
+      e.code.split('Digit').pop().split('Numpad').pop(),
+      10
+    );
+    if (number >= 1 && number <= 4) changeStep(steps[number - 1]);
+  }
 });
