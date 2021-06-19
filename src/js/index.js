@@ -46,6 +46,13 @@ const printTimer = () => {
   timer.innerText = title;
 };
 
+const updateStep = () => {
+  steps[step - 1 >= 0 ? step - 1 : 3].classList.remove(
+    'pomodoro__step--active'
+  );
+  steps[step].classList.add('pomodoro__step--active');
+};
+
 const updateTimer = (bellOn = true, toggleOn = true) => {
   if (seconds > 0) {
     seconds -= 1;
@@ -59,10 +66,12 @@ const updateTimer = (bellOn = true, toggleOn = true) => {
       } else {
         minutes = workTime;
         step += 1;
+        updateStep();
       }
     } else if (!isWorkTime && step === 3) {
       step = 0;
       minutes = workTime;
+      updateStep();
     } else {
       minutes = longBreakTime;
     }
@@ -96,9 +105,12 @@ const togglePomodoro = (clickOn = true) => {
 const restartPomodoro = (clickOn = true) => {
   if (clickOn) clickSound.play();
 
+  steps[step].classList.remove('pomodoro__step--active');
+  step = 0;
+  steps[step].classList.add('pomodoro__step--active');
+
   minutes = workTime;
   seconds = 0;
-  step = 0;
   isWorkTime = 1;
   printTimer();
 };
@@ -111,6 +123,7 @@ const skipPomodoro = (clickOn = true) => {
 };
 
 printTimer();
+updateStep();
 
 //* EVENTLISTENNERS
 start.addEventListener('click', togglePomodoro);
