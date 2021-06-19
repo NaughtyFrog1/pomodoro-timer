@@ -32,8 +32,8 @@ let timerInterval;
  * [x] printTimer()
  * [x] updateTimer()
  * [x] toggleTimer()
- * [ ] restartTimer()
- * [ ] skipTimer()
+ * [x] restartTimer()
+ * [x] skipTimer()
  * [ ] changeStep()
  * [ ] updateTime()
  */
@@ -103,10 +103,11 @@ const restartPomodoro = (clickOn = true) => {
   printTimer();
 };
 
-const skipPomodoro = (bellOn = true) => {
+const skipPomodoro = (clickOn = true) => {
+  if (clickOn) clickSound.play();
   seconds = 0;
   minutes = 0;
-  updateTimer(bellOn, false);
+  updateTimer(false, false);
 };
 
 printTimer();
@@ -115,3 +116,9 @@ printTimer();
 start.addEventListener('click', togglePomodoro);
 restart.addEventListener('click', restartPomodoro);
 skip.addEventListener('click', skipPomodoro);
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') togglePomodoro(false);
+  else if (e.code === 'KeyR') restartPomodoro(false);
+  else if (e.code === 'KeyS') skipPomodoro(false);
+});
