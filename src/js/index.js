@@ -70,14 +70,14 @@ const updateTimer = (bellOn = true, toggleOn = true) => {
     isWorkTime = !isWorkTime;
     if (bellOn) bellSound.play();
     // eslint-disable-next-line no-use-before-define
-    if (toggleOn) toggleTimer(false);
+    if (toggleOn) togglePomodoro(false);
   }
 
   printTimer();
 };
 
 // Play or pause the timer
-const toggleTimer = (clickOn = true) => {
+const togglePomodoro = (clickOn = true) => {
   if (clickOn) clickSound.play();
 
   if (isRunning) {
@@ -93,7 +93,7 @@ const toggleTimer = (clickOn = true) => {
   isRunning = !isRunning;
 };
 
-const restartTimer = (clickOn = true) => {
+const restartPomodoro = (clickOn = true) => {
   if (clickOn) clickSound.play();
 
   minutes = workTime;
@@ -103,7 +103,7 @@ const restartTimer = (clickOn = true) => {
   printTimer();
 };
 
-const skipTimer = (bellOn = true) => {
+const skipPomodoro = (bellOn = true) => {
   seconds = 0;
   minutes = 0;
   updateTimer(bellOn, false);
@@ -112,6 +112,6 @@ const skipTimer = (bellOn = true) => {
 printTimer();
 
 //* EVENTLISTENNERS
-start.addEventListener('click', toggleTimer);
-restart.addEventListener('click', restartTimer);
-skip.addEventListener('click', skipTimer);
+start.addEventListener('click', togglePomodoro);
+restart.addEventListener('click', restartPomodoro);
+skip.addEventListener('click', skipPomodoro);
