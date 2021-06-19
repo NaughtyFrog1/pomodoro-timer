@@ -26,3 +26,73 @@ let step = 0;
 let isRunning = false;
 let isWorkTime = true;
 let timerInterval;
+
+/**
+ * [x] zeroFill()
+ * [x] printTimer()
+ * [x] updateTimer()
+ * [x] toggleTimer()
+ * [ ] restartTimer()
+ * [ ] skipTimer()
+ * [ ] changeStep()
+ * [ ] updateTime()
+ */
+
+const zeroFill = (num) => `${num < 10 ? '0' : ''}${num}`;
+
+const printTimer = () => {
+  const title = `${zeroFill(minutes)}:${zeroFill(seconds)}`;
+  document.title = `${title} | Pomodoro Timer`;
+  timer.innerText = title;
+};
+
+const updateTimer = (bellOn = true, toggleOn = true) => {
+  if (seconds > 0) {
+    seconds -= 1;
+  } else if (minutes > 0) {
+    minutes -= 1;
+    seconds = 1; // 59
+  } else {
+    if (step < 3) {
+      if (isWorkTime) {
+        minutes = breakTime;
+      } else {
+        minutes = workTime;
+        step += 1;
+      }
+    } else if (!isWorkTime && step === 3) {
+      step = 0;
+      minutes = workTime;
+    } else {
+      minutes = longBreakTime;
+    }
+
+    isWorkTime = !isWorkTime;
+    if (bellOn) bellSound.play();
+    if (toggleOn) toggleTimer(false);
+  }
+
+  printTimer();
+};
+
+// Play or pause the timer
+const toggleTimer = (clickOn = true) => {
+  if (clickOn) clickSound.play();
+
+  if (isRunning) {
+    // If it's running, then stop
+    start.innerHTML = '<i class="fas fa-play"></i>';
+    clearInterval(timerInterval);
+  } else {
+    // else start running again
+    start.innerHTML = '<i class="fas fa-pause"></i>';
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  isRunning = !isRunning;
+};
+
+printTimer();
+
+//* EVENTLISTENNERS
+start.addEventListener('click', toggleTimer);
