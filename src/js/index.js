@@ -112,6 +112,7 @@ const restartPomodoro = (clickOn = true) => {
   minutes = workTime;
   seconds = 0;
   isWorkTime = 1;
+  if (isRunning) togglePomodoro(false);
   printTimer();
 };
 
@@ -119,17 +120,20 @@ const skipPomodoro = (clickOn = true) => {
   if (clickOn) clickSound.play();
   seconds = 0;
   minutes = 0;
-  updateTimer(false, false);
+  updateTimer(false, isRunning);
 };
 
 const changeStep = (e) => {
   steps[step].classList.remove('pomodoro__step--active');
   steps[e.target.dataset.step].classList.add('pomodoro__step--active');
 
+  if (isRunning) togglePomodoro(false);
+
   step = parseInt(e.target.dataset.step, 10);
   minutes = workTime;
   seconds = 0;
   isWorkTime = true;
+  printTimer();
 };
 
 printTimer();
