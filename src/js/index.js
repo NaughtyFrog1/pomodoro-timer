@@ -69,6 +69,7 @@ const updateTimer = (bellOn = true, toggleOn = true) => {
 
     isWorkTime = !isWorkTime;
     if (bellOn) bellSound.play();
+    // eslint-disable-next-line no-use-before-define
     if (toggleOn) toggleTimer(false);
   }
 
@@ -92,7 +93,25 @@ const toggleTimer = (clickOn = true) => {
   isRunning = !isRunning;
 };
 
+const restartTimer = (clickOn = true) => {
+  if (clickOn) clickSound.play();
+
+  minutes = workTime;
+  seconds = 0;
+  step = 0;
+  isWorkTime = 1;
+  printTimer();
+};
+
+const skipTimer = (bellOn = true) => {
+  seconds = 0;
+  minutes = 0;
+  updateTimer(bellOn, false);
+};
+
 printTimer();
 
 //* EVENTLISTENNERS
 start.addEventListener('click', toggleTimer);
+restart.addEventListener('click', restartTimer);
+skip.addEventListener('click', skipTimer);
