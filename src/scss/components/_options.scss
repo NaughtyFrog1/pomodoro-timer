@@ -1,0 +1,46 @@
+.btn--options {
+  position: fixed;
+  bottom: Min(6vw, 4rem);
+  right: Min(6vw, 4rem);
+  height: 5.4rem;
+  width: 5.4rem;
+  background-color: lighten(#000, 18);
+  border-radius: 100%;
+  box-shadow: 0px 1px 2px transparentize(lighten(#000, 40), 0.15),
+  0px 2px 8px transparentize(lighten(#000, 40), 0.33);
+  color: darken(#fff, 7);
+  transition: .1s ease-in-out ;
+
+  i {
+    transition: .1s ease-in-out;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 1px 2px transparentize(lighten(#000, 40), 0.15),
+    0px 4px 8px transparentize(lighten(#000, 40), 0);
+
+    i {
+      transform: rotate(20deg);
+    }
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input--number {
+  padding: 0.6rem;
+  border: none;
+  background-color: darken(#fff, 10);
+  outline: none;
+  width: 8rem;
+}
+
+.label {
+  margin-bottom: map-get($spacers, 1);
+  color: lighten(#000, 24);
+  font-size: 1.4rem;
+}
