@@ -149,14 +149,16 @@ skip.addEventListener('click', skipPomodoro);
 steps.forEach((element) => element.addEventListener('click', changeStep));
 
 document.addEventListener('keydown', (e) => {
-  if (e.code === 'Space') togglePomodoro(false);
-  else if (e.code === 'KeyR') restartPomodoro(false);
-  else if (e.code === 'KeyS') skipPomodoro(false);
-  else if (e.code.includes('Digit') || e.code.includes('Numpad')) {
-    const number = parseInt(
-      e.code.split('Digit').pop().split('Numpad').pop(),
-      10
-    );
-    if (number >= 1 && number <= 4) changeStep(steps[number - 1]);
+  if (e.target.tagName !== 'INPUT') {
+    if (e.code === 'Space') togglePomodoro(false);
+    else if (e.code === 'KeyR') restartPomodoro(false);
+    else if (e.code === 'KeyS') skipPomodoro(false);
+    else if (e.code.includes('Digit') || e.code.includes('Numpad')) {
+      const number = parseInt(
+        e.code.split('Digit').pop().split('Numpad').pop(),
+        10
+      );
+      if (number >= 1 && number <= 4) changeStep(steps[number - 1]);
+    }
   }
 });
