@@ -35,7 +35,10 @@ let timerInterval;
  * [x] restartTimer()
  * [x] skipTimer()
  * [x] changeStep()
- * [ ] updateTime()
+ * [x] updateTime()
+ * [ ] save times in localStorage
+ * [ ] options modal
+ * [ ] keyboard shortcut modal
  */
 
 const zeroFill = (num) => `${num < 10 ? '0' : ''}${num}`;
@@ -58,7 +61,7 @@ const updateTimer = (bellOn = true, toggleOn = true) => {
     seconds -= 1;
   } else if (minutes > 0) {
     minutes -= 1;
-    seconds = 1; // 59
+    seconds = 59;
   } else {
     if (step < 3) {
       if (isWorkTime) {
@@ -161,4 +164,37 @@ document.addEventListener('keydown', (e) => {
       if (number >= 1 && number <= 4) changeStep(steps[number - 1]);
     }
   }
+});
+
+workOption.addEventListener('change', (e) => {
+  const newTime = parseInt(e.target.value, 10);
+
+  if (isWorkTime) {
+    minutes = newTime - (workTime - minutes); // newTime - elapsedTime
+    if (minutes < 0) skipPomodoro();
+  }
+  workTime = newTime;
+  printTimer();
+});
+
+breakOption.addEventListener('change', (e) => {
+  const newTime = parseInt(e.target.value, 10);
+
+  if (!isWorkTime && step <= 2) {
+    minutes = newTime - (breakTime - minutes);
+    if (minutes < 0) skipPomodoro();
+  }
+  breakTime = newTime;
+  printTimer();
+});
+
+longBreakOption.addEventListener('change', (e) => {
+  const newTime = parseInt(e.target.value, 10);
+
+  if (!isWorkTime && step === 3) {
+    minutes = newTime - (longBreakTime - minutes);
+    if (minutes < 0) skipPomodoro();
+  }
+  longBreakTime = newTime;
+  printTimer();
 });
