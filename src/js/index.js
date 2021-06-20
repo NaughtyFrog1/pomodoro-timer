@@ -1,3 +1,17 @@
+/** TODO
+ * [x] zeroFill()
+ * [x] printTimer()
+ * [x] updateTimer()
+ * [x] toggleTimer()
+ * [x] restartTimer()
+ * [x] skipTimer()
+ * [x] changeStep()
+ * [x] updateTime()
+ * [x] save times in localStorage
+ * [ ] options modal
+ * [ ] keyboard shortcut modal
+ */
+
 import '../scss/index.scss';
 
 // Sounds
@@ -8,6 +22,13 @@ const bellSound = new Audio('assets/sounds/bell.mp3');
 const workOption = document.querySelector('#options-work');
 const breakOption = document.querySelector('#options-break');
 const longBreakOption = document.querySelector('#options-long-break');
+
+workOption.value = parseInt(localStorage.getItem('workTime') ?? 25, 10);
+breakOption.value = parseInt(localStorage.getItem('breakTime') ?? 5, 10);
+longBreakOption.value = parseInt(
+  localStorage.getItem('longBreakTime') ?? 15,
+  10
+);
 
 // Pomodoro elements
 const timer = document.querySelector('.pomodoro__timer');
@@ -26,20 +47,6 @@ let step = 0;
 let isRunning = false;
 let isWorkTime = true;
 let timerInterval;
-
-/**
- * [x] zeroFill()
- * [x] printTimer()
- * [x] updateTimer()
- * [x] toggleTimer()
- * [x] restartTimer()
- * [x] skipTimer()
- * [x] changeStep()
- * [x] updateTime()
- * [ ] save times in localStorage
- * [ ] options modal
- * [ ] keyboard shortcut modal
- */
 
 const zeroFill = (num) => `${num < 10 ? '0' : ''}${num}`;
 
@@ -144,6 +151,10 @@ const changeStep = (e) => {
 printTimer();
 updateStep();
 
+localStorage.setItem('workTime', workTime);
+localStorage.setItem('breakTime', breakTime);
+localStorage.setItem('longBreakTime', longBreakTime);
+
 //* EVENTLISTENNERS
 start.addEventListener('click', togglePomodoro);
 restart.addEventListener('click', restartPomodoro);
@@ -174,6 +185,7 @@ workOption.addEventListener('change', (e) => {
     if (minutes < 0) skipPomodoro();
   }
   workTime = newTime;
+  localStorage.setItem('workTime', workTime);
   printTimer();
 });
 
@@ -185,6 +197,7 @@ breakOption.addEventListener('change', (e) => {
     if (minutes < 0) skipPomodoro();
   }
   breakTime = newTime;
+  localStorage.setItem('breakTime', breakTime);
   printTimer();
 });
 
@@ -196,5 +209,6 @@ longBreakOption.addEventListener('change', (e) => {
     if (minutes < 0) skipPomodoro();
   }
   longBreakTime = newTime;
+  localStorage.setItem('longBreakTime', longBreakTime);
   printTimer();
 });
