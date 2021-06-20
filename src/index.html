@@ -47,26 +47,41 @@
       </div>
     </main>
 
+    <button class="btn btn--options">
+      <i class="fas fa-cog"></i>
+    </button>
+
     <section class="modal modal--options mt-5" id="modal-options">
       <div class="modal__dialog container container--md">
         <header class="modal__header"></header>
         <section class="modal__content">
-          <form class="form">
-            <input
-              class="input--number"
-              id="options-work"
-              type="number"
-            />
-            <input
-              class="input--number"
-              id="options-break"
-              type="number"
-            />
-            <input
-              class="input--number"
-              id="options-long-break"
-              type="number"
-            />
+          <form class="form time-options">
+            <div class="input-group">
+              <label class="label" for="options-work">Work</label>
+              <input
+                class="input--number"
+                id="options-work"
+                type="number"
+              />
+            </div>
+
+            <div class="input-group">
+              <label class="label" for="options-break">Short Break</label>
+              <input
+                class="input--number"
+                id="options-break"
+                type="number"
+              />
+            </div>
+
+            <div class="input-group">
+              <label class="label" for="options-long-break">Long Break</label>
+              <input
+                class="input--number"
+                id="options-long-break"
+                type="number"
+              />
+            </div>
           </form>
         </section>
         <footer class="modal__footer"></footer>
