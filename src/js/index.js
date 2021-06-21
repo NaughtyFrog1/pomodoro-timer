@@ -1,24 +1,19 @@
-/** TODO
- * [x] zeroFill()
- * [x] printTimer()
- * [x] updateTimer()
- * [x] toggleTimer()
- * [x] restartTimer()
- * [x] skipTimer()
- * [x] changeStep()
- * [x] updateTime()
- * [x] save times in localStorage
- * [ ] options modal
- * [ ] keyboard shortcut modal
- */
-
 import '../scss/index.scss';
 
 // Sounds
 const clickSound = new Audio('assets/sounds/click.mp3');
 const bellSound = new Audio('assets/sounds/bell.mp3');
 
+// Modals
+const modals = document.querySelectorAll('.modal');
+const modalsClose = document.querySelectorAll('.modal__close');
+const modalsOk = document.querySelectorAll('.modal__ok');
+
 // Options
+const modalOption = document.querySelector('.modal--options');
+const btnOption = document.querySelector('.btn--options');
+const presetsOption = document.querySelectorAll('.options__preset');
+
 const workOption = document.querySelector('#options-work');
 const breakOption = document.querySelector('#options-break');
 const longBreakOption = document.querySelector('#options-long-break');
@@ -121,7 +116,7 @@ const restartPomodoro = (clickOn = true) => {
 
   minutes = workTime;
   seconds = 0;
-  isWorkTime = 1;
+  isWorkTime = true;
   if (isRunning) togglePomodoro(false);
   printTimer();
 };
@@ -212,3 +207,25 @@ longBreakOption.addEventListener('change', (e) => {
   localStorage.setItem('longBreakTime', longBreakTime);
   printTimer();
 });
+
+btnOption.addEventListener('click', () =>
+  modalOption.classList.toggle('hidden')
+);
+
+modals.forEach((modal) =>
+  modal.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) e.target.classList.add('hidden');
+  })
+);
+
+modalsClose.forEach((close) =>
+  close.addEventListener('click', (e) => {
+    e.target.parentElement.parentElement.parentElement.classList.add('hidden');
+  })
+);
+
+modalsOk.forEach((ok) =>
+  ok.addEventListener('click', (e) => {
+    e.target.parentElement.parentElement.parentElement.classList.add('hidden');
+  })
+);

@@ -51,8 +51,8 @@
       <i class="fas fa-cog"></i>
     </button>
 
-    <section class="modal modal--options" id="modal-options">
-      <div class="modal__dialog container container--md">
+    <section class="modal modal--options hidden" id="modal-options">
+      <div class="modal__dialog">
         <header class="modal__header mb-4">
           <h2 class="modal__title ta--left">Timer setting</h2>
           <i class="btn modal__close fas fa-times"></i>
@@ -93,7 +93,7 @@
               <p class="options__preset__name">Popular</p>
               <p class="options__preset__times">25 min &bull; 5 min &bull; 15 min</p>
             </div>
-            <div class="options__preset active" data-preset="medium">
+            <div class="options__preset" data-preset="medium">
               <p class="options__preset__name">Medium</p>
               <p class="options__preset__times">45 min &bull; 10 min &bull; 30 min</p>
             </div>
@@ -104,7 +104,7 @@
           </div>
         </section>
         <footer class="modal__footer mt-5">
-          <button class="btn btn--primary">Ok</button>
+          <button class="btn btn--primary modal__ok">Ok</button>
         </footer>
       </div>
     </section>
