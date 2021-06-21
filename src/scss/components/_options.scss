@@ -26,21 +26,35 @@
   }
 }
 
+.options__time {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @include breakpoint-mobile {
+    gap: 2.4rem;
+  }
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
 }
 
-.input--number {
+.input {
   padding: 0.6rem;
-  border: none;
   background-color: darken(#fff, 10);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px 0px transparentize(#000, 0.85);
   outline: none;
-  width: 8rem;
+  width: 100%;
+
 }
 
 .label {
   margin-bottom: map-get($spacers, 1);
   color: lighten(#000, 24);
   font-size: 1.4rem;
+  margin-bottom: 0.6rem;
 }

@@ -51,15 +51,18 @@
       <i class="fas fa-cog"></i>
     </button>
 
-    <section class="modal modal--options mt-5" id="modal-options">
+    <section class="modal modal--options" id="modal-options">
       <div class="modal__dialog container container--md">
-        <header class="modal__header"></header>
+        <header class="modal__header mb-4">
+          <h2 class="modal__title ta--left">Timer setting</h2>
+          <i class="btn modal__close fas fa-times"></i>
+        </header>
         <section class="modal__content">
-          <form class="form time-options">
+          <form class="form options__time">
             <div class="input-group">
               <label class="label" for="options-work">Work</label>
               <input
-                class="input--number"
+                class="input"
                 id="options-work"
                 type="number"
               />
@@ -68,7 +71,7 @@
             <div class="input-group">
               <label class="label" for="options-break">Short Break</label>
               <input
-                class="input--number"
+                class="input"
                 id="options-break"
                 type="number"
               />
@@ -77,14 +80,16 @@
             <div class="input-group">
               <label class="label" for="options-long-break">Long Break</label>
               <input
-                class="input--number"
+                class="input"
                 id="options-long-break"
                 type="number"
               />
             </div>
           </form>
         </section>
-        <footer class="modal__footer"></footer>
+        <footer class="modal__footer mt-5">
+          <button class="btn btn--primary">Ok</button>
+        </footer>
       </div>
     </section>
   </body>
