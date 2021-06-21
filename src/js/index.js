@@ -266,7 +266,7 @@ longBreakOption.addEventListener('change', () => {
 });
 
 presetsOption.forEach((preset) =>
-  preset.addEventListener('click', (e) => {
+  preset.addEventListener('click', () => {
     const oldActive = document.querySelector('.options__preset.active');
     if (oldActive) oldActive.classList.remove('active');
 
