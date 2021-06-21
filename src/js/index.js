@@ -33,30 +33,15 @@ const skip = document.querySelector('.pomodoro__skip');
 const steps = document.querySelectorAll('.pomodoro__step');
 
 // Pomodoro values
-let workTime = workOption.value;
-let breakTime = breakOption.value;
-let longBreakTime = longBreakOption.value;
+let workTime = parseInt(workOption.value, 10);
+let breakTime = parseInt(breakOption.value, 10);
+let longBreakTime = parseInt(longBreakOption.value, 10);
 let minutes = workOption.value;
 let seconds = 0;
 let step = 0;
 let isRunning = false;
 let isWorkTime = true;
 let timerInterval;
-
-const setWorkTime = (mins) => {
-  workTime = mins;
-  localStorage.setItem('workTime', mins);
-};
-
-const setBreakTime = (mins) => {
-  breakTime = mins;
-  localStorage.setItem('breakTime', mins);
-};
-
-const setLongBreakTime = (mins) => {
-  longBreakTime = mins;
-  localStorage.setItem('longBreakTime', mins);
-};
 
 const zeroFill = (num) => `${num < 10 ? '0' : ''}${num}`;
 
@@ -158,14 +143,70 @@ const changeStep = (e) => {
   printTimer();
 };
 
+const setWorkTime = (newTime) => {
+  if (isWorkTime) {
+    minutes = newTime - (workTime - minutes); // newTime - elapsedTime
+    if (minutes < 0) skipPomodoro(false);
+  }
+
+  workTime = newTime;
+  workOption.value = newTime;
+  localStorage.setItem('workTime', newTime);
+  printTimer();
+};
+
+const setBreakTime = (newTime) => {
+  if (!isWorkTime && step <= 2) {
+    minutes = newTime - (breakTime - minutes);
+    if (minutes < 0) skipPomodoro();
+  }
+
+  breakTime = newTime;
+  breakOption.value = newTime;
+  localStorage.setItem('breakTime', newTime);
+  printTimer();
+};
+
+const setLongBreakTime = (newTime) => {
+  if (!isWorkTime && step === 3) {
+    minutes = newTime - (longBreakTime - minutes);
+    if (minutes < 0) skipPomodoro();
+  }
+
+  longBreakTime = newTime;
+  longBreakOption.value = newTime;
+  localStorage.setItem('longBreakTime', newTime);
+  printTimer();
+};
+
+const checkPresetTimes = () => {
+  let presetPos = -1;
+
+  if (workTime === 25 && breakTime === 5 && longBreakTime === 15) {
+    presetPos = 0;
+  } else if (workTime === 45 && breakTime === 10 && longBreakTime === 30) {
+    presetPos = 1;
+  } else if (workTime === 90 && breakTime === 20 && longBreakTime === 60) {
+    presetPos = 2;
+  }
+
+  if (presetPos !== -1) {
+    const oldActive = document.querySelector('.options__preset.active');
+    if (oldActive) oldActive.classList.remove('active');
+    presetsOption[presetPos].classList.add('active');
+  }
+};
+
 printTimer();
 updateStep();
+checkPresetTimes();
 
 localStorage.setItem('workTime', workTime);
 localStorage.setItem('breakTime', breakTime);
 localStorage.setItem('longBreakTime', longBreakTime);
 
 //* EVENTLISTENNERS
+
 start.addEventListener('click', togglePomodoro);
 restart.addEventListener('click', restartPomodoro);
 skip.addEventListener('click', skipPomodoro);
@@ -187,57 +228,61 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-workOption.addEventListener('change', (e) => {
-  const newTime = parseInt(e.target.value, 10);
-
-  if (isWorkTime) {
-    minutes = newTime - (workTime - minutes); // newTime - elapsedTime
-    if (minutes < 0) skipPomodoro();
-  }
-  setWorkTime(newTime);
-  printTimer();
-});
-
-breakOption.addEventListener('change', (e) => {
-  const newTime = parseInt(e.target.value, 10);
-
-  if (!isWorkTime && step <= 2) {
-    minutes = newTime - (breakTime - minutes);
-    if (minutes < 0) skipPomodoro();
-  }
-  setBreakTime(newTime);
-  printTimer();
-});
-
-longBreakOption.addEventListener('change', (e) => {
-  const newTime = parseInt(e.target.value, 10);
-
-  if (!isWorkTime && step === 3) {
-    minutes = newTime - (longBreakTime - minutes);
-    if (minutes < 0) skipPomodoro();
-  }
-  setLongBreakTime(newTime);
-  printTimer();
-});
-
 btnOption.addEventListener('click', () =>
   modalOption.classList.toggle('hidden')
 );
 
 modals.forEach((modal) =>
   modal.addEventListener('click', (e) => {
-    if (e.target.classList.contains('modal')) e.target.classList.add('hidden');
+    if (e.target.classList.contains('modal')) modal.classList.add('hidden');
   })
 );
 
 modalsClose.forEach((close) =>
-  close.addEventListener('click', (e) => {
-    e.target.parentElement.parentElement.parentElement.classList.add('hidden');
+  close.addEventListener('click', () => {
+    close.parentElement.parentElement.parentElement.classList.add('hidden');
   })
 );
 
 modalsOk.forEach((ok) =>
-  ok.addEventListener('click', (e) => {
-    e.target.parentElement.parentElement.parentElement.classList.add('hidden');
+  ok.addEventListener('click', () => {
+    ok.parentElement.parentElement.parentElement.classList.add('hidden');
+  })
+);
+
+workOption.addEventListener('change', () => {
+  setWorkTime(parseInt(workOption.value, 10));
+  checkPresetTimes();
+});
+
+breakOption.addEventListener('change', () => {
+  setBreakTime(parseInt(breakOption.value, 10));
+  checkPresetTimes();
+});
+
+longBreakOption.addEventListener('change', () => {
+  setLongBreakTime(parseInt(longBreakOption.value, 10));
+  checkPresetTimes();
+});
+
+presetsOption.forEach((preset) =>
+  preset.addEventListener('click', (e) => {
+    const oldActive = document.querySelector('.options__preset.active');
+    if (oldActive) oldActive.classList.remove('active');
+
+    preset.classList.add('active');
+    if (preset.dataset.preset === 'popular') {
+      setWorkTime(25);
+      setBreakTime(5);
+      setLongBreakTime(15);
+    } else if (preset.dataset.preset === 'medium') {
+      setWorkTime(45);
+      setBreakTime(10);
+      setLongBreakTime(30);
+    } else if (preset.dataset.preset === 'extended') {
+      setWorkTime(90);
+      setBreakTime(20);
+      setLongBreakTime(60);
+    }
   })
 );

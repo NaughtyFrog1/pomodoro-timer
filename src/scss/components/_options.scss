@@ -74,12 +74,12 @@
   &:hover,
   &.active:hover {
     border: 1px solid lighten(#000, 30);
-    background-color: darken(#fff, 12);
+    background-color: darken(#fff, 14);
   }
 
   &.active {
     border: 1px solid lighten(#000, 42);
-    background-color: darken(#fff, 9);
+    background-color: darken(#fff, 12);
   }
 }
 
