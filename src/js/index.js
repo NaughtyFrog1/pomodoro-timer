@@ -43,6 +43,21 @@ let isRunning = false;
 let isWorkTime = true;
 let timerInterval;
 
+const setWorkTime = (mins) => {
+  workTime = mins;
+  localStorage.setItem('workTime', mins);
+};
+
+const setBreakTime = (mins) => {
+  breakTime = mins;
+  localStorage.setItem('breakTime', mins);
+};
+
+const setLongBreakTime = (mins) => {
+  longBreakTime = mins;
+  localStorage.setItem('longBreakTime', mins);
+};
+
 const zeroFill = (num) => `${num < 10 ? '0' : ''}${num}`;
 
 const printTimer = () => {
@@ -179,8 +194,7 @@ workOption.addEventListener('change', (e) => {
     minutes = newTime - (workTime - minutes); // newTime - elapsedTime
     if (minutes < 0) skipPomodoro();
   }
-  workTime = newTime;
-  localStorage.setItem('workTime', workTime);
+  setWorkTime(newTime);
   printTimer();
 });
 
@@ -191,8 +205,7 @@ breakOption.addEventListener('change', (e) => {
     minutes = newTime - (breakTime - minutes);
     if (minutes < 0) skipPomodoro();
   }
-  breakTime = newTime;
-  localStorage.setItem('breakTime', breakTime);
+  setBreakTime(newTime);
   printTimer();
 });
 
@@ -203,8 +216,7 @@ longBreakOption.addEventListener('change', (e) => {
     minutes = newTime - (longBreakTime - minutes);
     if (minutes < 0) skipPomodoro();
   }
-  longBreakTime = newTime;
-  localStorage.setItem('longBreakTime', longBreakTime);
+  setLongBreakTime(newTime);
   printTimer();
 });
 
