@@ -46,3 +46,8 @@
     color: lighten(#000, 34);
   }
 }
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+}

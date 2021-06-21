@@ -7,3 +7,16 @@
   padding: var(--space-md) var(--space-xl);
   text-align: center;
 }
+
+.btn--primary {
+  background-color: lighten(#000, 12);
+  color: darken(#fff, 7);
+  padding: 1rem 2.2rem;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: .1s ease-in-out;
+
+  &:hover {
+    background-color: lighten(#000, 9);
+  }
+}
