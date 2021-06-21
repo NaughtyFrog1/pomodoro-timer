@@ -46,7 +46,7 @@
   background-color: darken(#fff, 10);
   border: none;
   border-radius: 4px;
-  box-shadow: 0px 2px 4px 0px transparentize(#000, 0.85);
+  box-shadow: 0px 1px 0px 0px transparentize(#000, 0.85);
   outline: none;
   width: 100%;
 
@@ -57,4 +57,37 @@
   color: lighten(#000, 24);
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
+}
+
+.options__choose {
+  font-size: 1.4rem;
+}
+
+.options__preset {
+  cursor: pointer;
+  border: 1px solid lighten(#000, 60);
+  border-radius: 4px;
+  padding: map-get($spacers, 3);
+  margin-bottom: map-get($spacers, 3);
+  transition: .15s ease-in-out;
+
+  &:hover {
+    border: 1px solid lighten(#000, 40);
+    background-color: darken(#fff, 12);
+  }
+
+  &.active {
+    border: 1px solid lighten(#000, 40);
+    background-color: darken(#fff, 10);
+  }
+}
+
+.options__preset__name {
+  font-weight: 700;
+  margin: 0;
+}
+
+.options__preset__times {
+  color: lighten(#000, 24);
+  margin: 1rem 0 0;
 }
